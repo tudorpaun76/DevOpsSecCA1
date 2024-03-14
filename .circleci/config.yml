@@ -10,10 +10,10 @@ workflows:
             only:
               - main
     deploy:
-    jobs:
-      - deploy:
-          requires:
-            - build     
+      jobs:
+       - deploy:
+            requires:
+              - build     
 
 jobs:
   build:
