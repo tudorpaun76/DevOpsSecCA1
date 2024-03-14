@@ -5,10 +5,16 @@ workflows:
   build:
     jobs:
       - build:
-        filters:
-          branches:
-            only:
-              - main
+          filters:
+            branches:
+              only:
+                - main
+
+  deploy:
+    jobs:
+      - deploy:
+          requires:
+            - build
 
 jobs:
   build:
@@ -30,6 +36,7 @@ jobs:
           paths: 
             - ./node_modules
             - ./package-lock.json
+
   deploy:
     docker:
       - image: circleci/node:10.16.3
