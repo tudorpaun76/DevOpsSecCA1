@@ -5,16 +5,15 @@ workflows:
   build:
     jobs:
       - build:
-          filters:
-            branches:
-              only:
-                - main
-
-  deploy:
+        filters:
+          branches:
+            only:
+              - main
+    deploy:
     jobs:
       - deploy:
           requires:
-            - build
+            - build     
 
 jobs:
   build:
@@ -36,7 +35,6 @@ jobs:
           paths: 
             - ./node_modules
             - ./package-lock.json
-
   deploy:
     docker:
       - image: circleci/node:10.16.3
@@ -45,4 +43,4 @@ jobs:
       - run:
           name: Deploy to AWS EC2
           command: |
-            scp -i \Users\GGmachines_Gaming\OneDrive\Desktop\devops\DevOpsKeySec.pem -r ./ ubuntu@ec2-13-49-231-207.eu-north-1.compute.amazonaws.com :/home/ubuntu/myApp
+            scp -i \Users\GGmachines_Gaming\OneDrive\Desktop\devops\DevOpsKeySec.pem -r ./ ubuntu@ec2-13-49-231-207.eu-north-1.compute.amazonaws.com:/home/ubuntu/myApp
